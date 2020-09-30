@@ -15,9 +15,6 @@ public class Movie {
     private String title;
     private String description;
 
-    public Movie() {
-    }
-
     public Long getId() {
         return id;
     }
