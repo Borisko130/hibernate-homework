@@ -5,7 +5,7 @@ import com.dev.cinema.model.Movie;
 import com.dev.cinema.service.MovieService;
 
 public class Main {
-    private static Injector injector = Injector.getInstance("com.dev.cinema");
+    private static Injector injector = Injector.getInstance("com");
     private static MovieService movieService
             = (MovieService) injector.getInstance(MovieService.class);
 
