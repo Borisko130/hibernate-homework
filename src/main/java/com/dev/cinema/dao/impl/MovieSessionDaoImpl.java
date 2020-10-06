@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 @Dao
 public class MovieSessionDaoImpl implements MovieSessionDao {
@@ -36,6 +37,15 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
 
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
-        return null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<MovieSession> query = session.createQuery("FROM MovieSession "
+                    + "WHERE movie.id = :movieId AND showTime BETWEEN :timeStart AND :timeEnd", MovieSession.class);
+            query.setParameter("movieId", movieId);
+            query.setParameter("timeStart", date.atTime(0, 0, 0));
+            query.setParameter("timeEnd", date.atTime(23,59,59));
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new DataProcessingException("Failed to find available sessions by provided parameters", e);
+        }
     }
 }
