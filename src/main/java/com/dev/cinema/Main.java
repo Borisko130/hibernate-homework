@@ -44,6 +44,7 @@ public class Main {
                 2020, Month.OCTOBER, 6, 22, 20));
         movieSessionService.add(eveningSession);
 
+
         List<MovieSession> sessionList
                 = movieSessionService.findAvailableSessions(movie.getId(), LocalDate.now());
         System.out.println(sessionList);
