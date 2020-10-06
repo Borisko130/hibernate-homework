@@ -7,7 +7,6 @@ import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -45,7 +44,8 @@ public class Main {
                 2020, Month.OCTOBER, 6, 22, 20));
         movieSessionService.add(eveningSession);
 
-        List<MovieSession> sessionList = movieSessionService.findAvailableSessions(movie.getId(), LocalDate.now());
+        List<MovieSession> sessionList
+                = movieSessionService.findAvailableSessions(movie.getId(), LocalDate.now());
         System.out.println(sessionList);
     }
 }
