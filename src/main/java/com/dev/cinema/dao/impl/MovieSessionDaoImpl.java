@@ -6,6 +6,7 @@ import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.util.HibernateUtil;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -42,8 +43,8 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
                     + "WHERE movie.id = :movieId AND showTime "
                     + "BETWEEN :timeStart AND :timeEnd", MovieSession.class);
             query.setParameter("movieId", movieId);
-            query.setParameter("timeStart", date.atTime(0, 0, 0));
-            query.setParameter("timeEnd", date.atTime(23,59,59));
+            query.setParameter("timeStart", date.atStartOfDay());
+            query.setParameter("timeEnd", date.atTime(LocalTime.MAX));
             return query.getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Failed to find available "
