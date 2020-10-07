@@ -29,6 +29,7 @@ public class Main {
 
         CinemaHall hall = new CinemaHall();
         hall.setCapacity(200);
+        hall.setDescription("Some hall");
         cinemaHallService.add(hall);
 
         MovieSession morningSession = new MovieSession();
