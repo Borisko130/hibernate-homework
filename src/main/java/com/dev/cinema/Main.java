@@ -4,6 +4,7 @@ import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
+import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
@@ -20,6 +21,8 @@ public class Main {
             = (CinemaHallService) injector.getInstance(CinemaHallService.class);
     private static MovieSessionService movieSessionService
             = (MovieSessionService) injector.getInstance(MovieSessionService.class);
+    private static AuthenticationService authenticationService
+            = (AuthenticationService) injector.getInstance(AuthenticationService.class);
 
     public static void main(String[] args) {
         Movie movie = new Movie();
@@ -48,5 +51,7 @@ public class Main {
         List<MovieSession> sessionList
                 = movieSessionService.findAvailableSessions(movie.getId(), LocalDate.now());
         System.out.println(sessionList);
+
+        authenticationService.register("email@mail.net", "1234");
     }
 }
