@@ -26,8 +26,8 @@ public class UserDaoImpl implements UserDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't insert User entity with id "
-                    + user.getId(), e);
+            throw new DataProcessingException("Can't insert User entity with email "
+                    + user.getEmail(), e);
         } finally {
             if (session != null) {
                 session.close();
