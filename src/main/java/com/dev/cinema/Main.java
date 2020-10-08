@@ -1,52 +1,21 @@
 package com.dev.cinema;
 
+import com.dev.cinema.exceptions.AuthenticationException;
 import com.dev.cinema.lib.Injector;
-import com.dev.cinema.model.CinemaHall;
-import com.dev.cinema.model.Movie;
-import com.dev.cinema.model.MovieSession;
-import com.dev.cinema.service.CinemaHallService;
-import com.dev.cinema.service.MovieService;
-import com.dev.cinema.service.MovieSessionService;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.List;
+import com.dev.cinema.security.AuthenticationService;
+import com.dev.cinema.service.UserService;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
-    private static MovieService movieService
-            = (MovieService) injector.getInstance(MovieService.class);
-    private static CinemaHallService cinemaHallService
-            = (CinemaHallService) injector.getInstance(CinemaHallService.class);
-    private static MovieSessionService movieSessionService
-            = (MovieSessionService) injector.getInstance(MovieSessionService.class);
+    private static UserService userService
+            = (UserService) injector.getInstance(UserService.class);
+    private static AuthenticationService authenticationService
+            = (AuthenticationService) injector.getInstance(AuthenticationService.class);
 
-    public static void main(String[] args) {
-        Movie movie = new Movie();
-        movie.setTitle("Fast and Furious");
-        movieService.add(movie);
-        movieService.getAll().forEach(System.out::println);
-
-        CinemaHall hall = new CinemaHall();
-        hall.setCapacity(200);
-        hall.setDescription("Some hall");
-        cinemaHallService.add(hall);
-
-        MovieSession morningSession = new MovieSession();
-        morningSession.setCinemaHall(hall);
-        morningSession.setMovie(movie);
-        morningSession.setShowTime(LocalDateTime.of(
-                2020, Month.OCTOBER, 6, 10, 20));
-        movieSessionService.add(morningSession);
-        MovieSession eveningSession = new MovieSession();
-        eveningSession.setCinemaHall(hall);
-        eveningSession.setMovie(movie);
-        eveningSession.setShowTime(LocalDateTime.of(
-                2020, Month.OCTOBER, 6, 22, 20));
-        movieSessionService.add(eveningSession);
-
-        List<MovieSession> sessionList
-                = movieSessionService.findAvailableSessions(movie.getId(), LocalDate.now());
-        System.out.println(sessionList);
+    public static void main(String[] args) throws AuthenticationException {
+        authenticationService.register("email@mail.net", "1234");
+        System.out.println(userService.findByEmail("email@mail.net"));
+        System.out.println("\n\n");
+        System.out.println(authenticationService.login("email@mail.net", "1234"));
     }
 }
