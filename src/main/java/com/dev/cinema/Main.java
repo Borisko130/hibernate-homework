@@ -25,11 +25,11 @@ public class Main {
         shoppingCartService.addSession(movieSession, user);
         System.out.println("\n---GETTING CART---");
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
-        /*System.out.println("\n---CART WITH TICKETS---");
+        System.out.println("\n---CART WITH TICKETS---");
         System.out.println(shoppingCart);
         System.out.println("\n---CLEARING CART---");
         shoppingCartService.clear(shoppingCart);
         System.out.println("\n---EMPTY CART---");
-        System.out.println(shoppingCart);*/
+        System.out.println(shoppingCart)
     }
 }
