@@ -25,7 +25,7 @@ public class TicketDaoImpl implements TicketDao {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can't insert Ticket of User with id "
-                    + ticket.getUser(), e);
+                    + ticket.getUser().getId(), e);
         } finally {
             if (session != null) {
                 session.close();
