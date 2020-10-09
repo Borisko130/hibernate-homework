@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "tickets")
@@ -14,8 +16,10 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @Cascade(CascadeType.SAVE_UPDATE)
     private MovieSession movieSession;
     @ManyToOne
+    @Cascade(CascadeType.SAVE_UPDATE)
     private User user;
 
     public Long getId() {
