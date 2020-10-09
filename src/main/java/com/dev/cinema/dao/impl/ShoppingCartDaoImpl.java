@@ -44,7 +44,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
                     + "LEFT JOIN FETCH t.movieSession "
                     + "WHERE sc.user.id = :userId", ShoppingCart.class);
             query.setParameter("userId", user.getId());
-            return query.uniqueResult();
+            return query.getSingleResult();
         } catch (Exception e) {
             throw new DataProcessingException("Failed to find ShoppingCart for user with id "
                     + user.getId(), e);
