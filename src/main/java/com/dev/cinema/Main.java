@@ -30,6 +30,6 @@ public class Main {
         System.out.println("\n---CLEARING CART---");
         shoppingCartService.clear(shoppingCart);
         System.out.println("\n---EMPTY CART---");
-        System.out.println(shoppingCart)
+        System.out.println(shoppingCart);
     }
 }
