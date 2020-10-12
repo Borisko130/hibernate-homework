@@ -26,10 +26,16 @@ public class Main {
         User user = userService.findByEmail("email@mail.net").get();
         MovieSession movieSession = new MovieSession();
         shoppingCartService.addSession(movieSession, user);
+
+        System.out.println("FIRST ORDER");
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
-        System.out.println(shoppingCart);
+        System.out.println(orderService.completeOrder(shoppingCart.getTickets(), shoppingCart.getUser()));
 
-        System.out.println();
+        System.out.println("SECOND ORDER ORDER");
+        shoppingCartService.addSession(movieSession, user);
+        shoppingCart = shoppingCartService.getByUser(user);
+        System.out.println(orderService.completeOrder(shoppingCart.getTickets(), shoppingCart.getUser()));
 
+        System.out.println(orderService.getOrderHistory(user));
     }
 }
