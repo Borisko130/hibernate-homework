@@ -6,11 +6,10 @@ import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.Order;
 import com.dev.cinema.model.User;
 import com.dev.cinema.util.HibernateUtil;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-
-import java.util.List;
 
 @Dao
 public class OrderDaoImpl implements OrderDao {
@@ -30,28 +29,6 @@ public class OrderDaoImpl implements OrderDao {
             }
             throw new DataProcessingException("Can't insert Order of User with id "
                     + order.getUser().getId(), e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-    }
-
-    @Override
-    public void update(Order order) {
-        Transaction transaction = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            session.merge(order);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("Failed to update Order with id "
-                    + order.getId(), e);
         } finally {
             if (session != null) {
                 session.close();
