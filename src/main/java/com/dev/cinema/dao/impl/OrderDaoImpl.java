@@ -46,7 +46,7 @@ public class OrderDaoImpl implements OrderDao {
             query.setParameter("userId", user.getId());
             return query.getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Failed to find Order for user with id "
+            throw new DataProcessingException("Failed to find Orders of user with id "
                     + user.getId(), e);
         }
     }
