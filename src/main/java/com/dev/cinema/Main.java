@@ -29,12 +29,14 @@ public class Main {
 
         System.out.println("FIRST ORDER");
         ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
-        System.out.println(orderService.completeOrder(shoppingCart.getTickets(), shoppingCart.getUser()));
+        System.out.println(orderService.completeOrder(shoppingCart.getTickets(),
+                shoppingCart.getUser()));
 
         System.out.println("SECOND ORDER ORDER");
         shoppingCartService.addSession(movieSession, user);
         shoppingCart = shoppingCartService.getByUser(user);
-        System.out.println(orderService.completeOrder(shoppingCart.getTickets(), shoppingCart.getUser()));
+        System.out.println(orderService.completeOrder(shoppingCart.getTickets(),
+                shoppingCart.getUser()));
 
         System.out.println(orderService.getOrderHistory(user));
     }
