@@ -10,5 +10,5 @@ public interface OrderDao {
 
     void update(Order order);
 
-    Order getByUser(User user);
+    List<Order> getOrdersByUser(User user);
 }

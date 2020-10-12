@@ -10,6 +10,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.List;
+
 @Dao
 public class OrderDaoImpl implements OrderDao {
     @Override
@@ -58,14 +60,14 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Order getByUser(User user) {
+    public List<Order> getOrdersByUser(User user) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Order> query = session.createQuery("FROM Order o "
                     + "JOIN FETCH o.user "
                     + "LEFT JOIN FETCH o.tickets t "
                     + "WHERE o.user.id = :userId", Order.class);
             query.setParameter("userId", user.getId());
-            return query.getSingleResult();
+            return query.getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Failed to find Order for user with id "
                     + user.getId(), e);
