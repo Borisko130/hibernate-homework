@@ -32,7 +32,7 @@ public class Main {
         System.out.println(orderService.completeOrder(shoppingCart.getTickets(),
                 shoppingCart.getUser()));
 
-        System.out.println("SECOND ORDER ORDER");
+        System.out.println("SECOND ORDER");
         shoppingCartService.addSession(movieSession, user);
         shoppingCart = shoppingCartService.getByUser(user);
         System.out.println(orderService.completeOrder(shoppingCart.getTickets(),
