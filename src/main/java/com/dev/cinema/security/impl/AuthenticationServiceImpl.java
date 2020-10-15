@@ -8,17 +8,16 @@ import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import com.dev.cinema.util.HashUtil;
-import org.apache.log4j.Logger;
-
 import java.util.Optional;
+import org.apache.log4j.Logger;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
+    private static final Logger logger = Logger.getLogger(AuthenticationServiceImpl.class);
     @Inject
     private UserService userService;
     @Inject
     private ShoppingCartService shoppingCartService;
-    private static final Logger logger = Logger.getLogger(AuthenticationServiceImpl.class);
 
     @Override
     public User login(String email, String password) throws AuthenticationException {

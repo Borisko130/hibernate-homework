@@ -24,7 +24,6 @@ public class Main {
             = (OrderService) injector.getInstance(OrderService.class);
     private static final Logger logger = Logger.getLogger(CinemaHallDaoImpl.class);
 
-
     public static void main(String[] args) throws AuthenticationException {
         authenticationService.register("email@mail.net", "1234");
         User user = userService.findByEmail("email@mail.net").get();
