@@ -17,7 +17,6 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
 
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
-        logger.debug("Method add() invoked");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -31,9 +30,8 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.error("Can't insert CinemaHall entity with id "
-                    + cinemaHall.getId());
-            throw new DataProcessingException(e);
+            throw new DataProcessingException("Can't insert CinemaHall entity with id "
+                    + cinemaHall.getId(), e);
         } finally {
             if (session != null) {
                 session.close();
@@ -43,7 +41,6 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
 
     @Override
     public List<CinemaHall> getAll() {
-        logger.debug("Method getAll() invoked");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<CinemaHall> getCinemaHalls
                     = session.createQuery("from CinemaHall", CinemaHall.class);
