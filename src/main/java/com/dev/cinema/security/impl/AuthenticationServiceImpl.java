@@ -8,6 +8,8 @@ import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import com.dev.cinema.util.HashUtil;
+import org.apache.log4j.Logger;
+
 import java.util.Optional;
 
 @Service
@@ -16,9 +18,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private UserService userService;
     @Inject
     private ShoppingCartService shoppingCartService;
+    private static final Logger logger = Logger.getLogger(AuthenticationServiceImpl.class);
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
+        logger.info("User with email " + email + " logs in");
         Optional<User> userFromDb = userService.findByEmail(email);
         if (userFromDb.isPresent() && checkPassword(userFromDb.get(), password)) {
             return userFromDb.get();
@@ -28,6 +32,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User register(String email, String password) {
+        logger.info("Registering new User");
         User user = new User(email, password);
         user = userService.add(user);
         shoppingCartService.registerNewShoppingCart(user);

@@ -7,14 +7,18 @@ import com.dev.cinema.model.Order;
 import com.dev.cinema.model.User;
 import com.dev.cinema.util.HibernateUtil;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 @Dao
 public class OrderDaoImpl implements OrderDao {
+    private static final Logger logger = Logger.getLogger(OrderDaoImpl.class);
+
     @Override
     public Order add(Order order) {
+        logger.debug("Method add() invoked");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -38,6 +42,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> getOrdersByUser(User user) {
+        logger.debug("Method getOrdersByUser() invoked");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Order> query = session.createQuery("SELECT DISTINCT o FROM Order o "
                     + "JOIN FETCH o.user "

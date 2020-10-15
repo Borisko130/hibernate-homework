@@ -17,6 +17,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
 
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
+        logger.debug("Method add() invoked");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -24,7 +25,6 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
             transaction = session.beginTransaction();
             session.save(cinemaHall);
             transaction.commit();
-            logger.debug("Method add() executed");
             return cinemaHall;
         } catch (Exception e) {
             if (transaction != null) {
@@ -41,10 +41,10 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
 
     @Override
     public List<CinemaHall> getAll() {
+        logger.debug("Method getAll() invoked");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<CinemaHall> getCinemaHalls
                     = session.createQuery("from CinemaHall", CinemaHall.class);
-            logger.debug("Method getAll() executed");
             return getCinemaHalls.getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Failed to get all cinema halls", e);
