@@ -6,14 +6,18 @@ import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.util.HibernateUtil;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 @Dao
 public class CinemaHallDaoImpl implements CinemaHallDao {
+    private static final Logger logger = Logger.getLogger(CinemaHallDaoImpl.class);
+
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
+        logger.debug("Method add() invoked");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -37,6 +41,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
 
     @Override
     public List<CinemaHall> getAll() {
+        logger.debug("Method getAll() invoked");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<CinemaHall> getCinemaHalls
                     = session.createQuery("from CinemaHall", CinemaHall.class);
