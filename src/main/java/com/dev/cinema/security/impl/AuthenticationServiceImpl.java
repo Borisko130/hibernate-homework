@@ -21,7 +21,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
-        logger.info("User with email " + email + " logs in");
+        logger.info("User with email " + email + " tries to log in");
         Optional<User> userFromDb = userService.findByEmail(email);
         if (userFromDb.isPresent() && checkPassword(userFromDb.get(), password)) {
             return userFromDb.get();
@@ -31,7 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User register(String email, String password) {
-        logger.info("Registering new User");
+        logger.info("Registering new User with email " + email);
         User user = new User(email, password);
         user = userService.add(user);
         shoppingCartService.registerNewShoppingCart(user);
