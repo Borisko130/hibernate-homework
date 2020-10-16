@@ -1,6 +1,5 @@
 package com.dev.cinema;
 
-import com.dev.cinema.dao.impl.CinemaHallDaoImpl;
 import com.dev.cinema.exceptions.AuthenticationException;
 import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
@@ -15,9 +14,8 @@ import com.dev.cinema.service.MovieSessionService;
 import com.dev.cinema.service.OrderService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
-import org.apache.log4j.Logger;
-
 import java.time.LocalDateTime;
+import org.apache.log4j.Logger;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
@@ -39,7 +37,6 @@ public class Main {
 
     public static void main(String[] args) throws AuthenticationException {
         authenticationService.register("email@mail.net", "1234");
-        User user = userService.findByEmail("email@mail.net").get();
 
         try {
             authenticationService.login("email@mail.net", "1234");
@@ -63,6 +60,7 @@ public class Main {
         movieSession.setMovie(movie);
         movieSession.setCinemaHall(cinemaHall);
         movieSession.setShowTime(LocalDateTime.now());
+        User user = userService.findByEmail("email@mail.net").get();
         shoppingCartService.addSession(movieSession, user);
         logger.info(shoppingCartService.getByUser(user));
 
