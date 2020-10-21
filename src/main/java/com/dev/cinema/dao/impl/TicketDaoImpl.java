@@ -1,7 +1,7 @@
 package com.dev.cinema.dao.impl;
 
 import com.dev.cinema.dao.TicketDao;
-import com.dev.cinema.exceptions.DataProcessingException;
+import com.dev.cinema.exception.DataProcessingException;
 import com.dev.cinema.model.Ticket;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;

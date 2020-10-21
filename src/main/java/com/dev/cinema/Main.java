@@ -1,7 +1,7 @@
 package com.dev.cinema;
 
 import com.dev.cinema.config.AppConfig;
-import com.dev.cinema.exceptions.AuthenticationException;
+import com.dev.cinema.exception.AuthenticationException;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
