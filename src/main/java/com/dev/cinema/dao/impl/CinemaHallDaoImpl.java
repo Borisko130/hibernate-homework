@@ -3,10 +3,11 @@ package com.dev.cinema.dao.impl;
 import com.dev.cinema.dao.CinemaHallDao;
 import com.dev.cinema.exceptions.DataProcessingException;
 import com.dev.cinema.model.CinemaHall;
-import com.dev.cinema.util.HibernateUtil;
+
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CinemaHallDaoImpl implements CinemaHallDao {
     private static final Logger logger = Logger.getLogger(CinemaHallDaoImpl.class);
+    private SessionFactory sessionFactory;
+
+    public CinemaHallDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
@@ -21,7 +27,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
         Transaction transaction = null;
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(cinemaHall);
             transaction.commit();
@@ -42,7 +48,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
     @Override
     public List<CinemaHall> getAll() {
         logger.debug("Method getAll() invoked");
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Query<CinemaHall> getCinemaHalls
                     = session.createQuery("from CinemaHall", CinemaHall.class);
             return getCinemaHalls.getResultList();
