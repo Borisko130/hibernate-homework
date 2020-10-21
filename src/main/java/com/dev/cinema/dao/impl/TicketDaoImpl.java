@@ -2,14 +2,14 @@ package com.dev.cinema.dao.impl;
 
 import com.dev.cinema.dao.TicketDao;
 import com.dev.cinema.exceptions.DataProcessingException;
-import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.Ticket;
 import com.dev.cinema.util.HibernateUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
-@Dao
+@Repository
 public class TicketDaoImpl implements TicketDao {
     private static final Logger logger = Logger.getLogger(TicketDaoImpl.class);
 
