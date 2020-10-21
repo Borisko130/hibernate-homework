@@ -1,8 +1,6 @@
 package com.dev.cinema.security.impl;
 
 import com.dev.cinema.exceptions.AuthenticationException;
-import com.dev.cinema.lib.Inject;
-import com.dev.cinema.lib.Service;
 import com.dev.cinema.model.User;
 import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.ShoppingCartService;
@@ -10,14 +8,19 @@ import com.dev.cinema.service.UserService;
 import com.dev.cinema.util.HashUtil;
 import java.util.Optional;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     private static final Logger logger = Logger.getLogger(AuthenticationServiceImpl.class);
-    @Inject
-    private UserService userService;
-    @Inject
-    private ShoppingCartService shoppingCartService;
+    private final UserService userService;
+    private final ShoppingCartService shoppingCartService;
+
+    public AuthenticationServiceImpl(UserService userService,
+                                     ShoppingCartService shoppingCartService) {
+        this.userService = userService;
+        this.shoppingCartService = shoppingCartService;
+    }
 
     @Override
     public User login(String email, String password) throws AuthenticationException {

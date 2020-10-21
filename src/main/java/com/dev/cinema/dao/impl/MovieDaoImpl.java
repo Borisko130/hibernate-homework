@@ -3,7 +3,6 @@ package com.dev.cinema.dao.impl;
 import com.dev.cinema.dao.MovieDao;
 import com.dev.cinema.exceptions.DataProcessingException;
 import com.dev.cinema.model.Movie;
-
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
