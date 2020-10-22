@@ -45,6 +45,17 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
     }
 
     @Override
+    public CinemaHall getById(Long id) {
+        logger.debug("Method getById() invoked with id " + id);
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(CinemaHall.class, id);
+        } catch (Exception e) {
+            throw new DataProcessingException("Failed to get CinemaHall with id "
+                    + id, e);
+        }
+    }
+
+    @Override
     public List<CinemaHall> getAll() {
         logger.debug("Method getAll() invoked");
         try (Session session = sessionFactory.openSession()) {
