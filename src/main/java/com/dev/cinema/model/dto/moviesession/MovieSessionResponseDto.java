@@ -1,8 +1,5 @@
 package com.dev.cinema.model.dto.moviesession;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDateTime;
-
 public class MovieSessionResponseDto {
     private Long id;
     private Long movieId;
