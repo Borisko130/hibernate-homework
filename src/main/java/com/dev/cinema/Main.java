@@ -1,7 +1,7 @@
 package com.dev.cinema;
 
-import com.dev.cinema.exceptions.AuthenticationException;
-import com.dev.cinema.lib.Injector;
+import com.dev.cinema.config.AppConfig;
+import com.dev.cinema.exception.AuthenticationException;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
@@ -10,34 +10,32 @@ import com.dev.cinema.model.User;
 import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
-import com.dev.cinema.service.MovieSessionService;
 import com.dev.cinema.service.OrderService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import java.time.LocalDateTime;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
-    private static Injector injector = Injector.getInstance("com.dev.cinema");
-    private static UserService userService
-            = (UserService) injector.getInstance(UserService.class);
-    private static AuthenticationService authenticationService
-            = (AuthenticationService) injector.getInstance(AuthenticationService.class);
-    private static ShoppingCartService shoppingCartService
-            = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
-    private static OrderService orderService
-            = (OrderService) injector.getInstance(OrderService.class);
-    private static MovieService movieService
-            = (MovieService) injector.getInstance(MovieService.class);
-    private static MovieSessionService movieSessionService
-            = (MovieSessionService) injector.getInstance(MovieSessionService.class);
-    private static CinemaHallService cinemaHallService
-            = (CinemaHallService) injector.getInstance(CinemaHallService.class);
     private static final Logger logger = Logger.getLogger(Main.class);
+    private static final AnnotationConfigApplicationContext context
+            = new AnnotationConfigApplicationContext(AppConfig.class);
+    private static final UserService userService
+            = context.getBean(UserService.class);
+    private static final AuthenticationService authenticationService
+            = context.getBean(AuthenticationService.class);
+    private static final CinemaHallService cinemaHallService
+            = context.getBean(CinemaHallService.class);
+    private static final MovieService movieService
+            = context.getBean(MovieService.class);
+    private static final OrderService orderService
+            = context.getBean(OrderService.class);
+    private static final ShoppingCartService shoppingCartService
+            = context.getBean(ShoppingCartService.class);
 
     public static void main(String[] args) throws AuthenticationException {
         authenticationService.register("email@mail.net", "1234");
-
         try {
             authenticationService.login("email@mail.net", "1234");
         } catch (Exception e) {

@@ -1,6 +1,6 @@
 package com.dev.cinema.util;
 
-import com.dev.cinema.exceptions.HashingFailedException;
+import com.dev.cinema.exception.HashingFailedException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
