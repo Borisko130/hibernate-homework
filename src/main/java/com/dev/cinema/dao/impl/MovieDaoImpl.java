@@ -46,6 +46,17 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
+    public Movie getById(Long id) {
+        logger.debug("Method getById() invoked with id " + id);
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(Movie.class, id);
+        } catch (Exception e) {
+            throw new DataProcessingException("Failed to get Movie with id "
+                    + id, e);
+        }
+    }
+
+    @Override
     public List<Movie> getAll() {
         logger.debug("Method getAll() invoked");
         try (Session session = sessionFactory.openSession()) {
@@ -56,5 +67,3 @@ public class MovieDaoImpl implements MovieDao {
         }
     }
 }
-
-
