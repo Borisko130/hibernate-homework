@@ -5,10 +5,9 @@ import com.dev.cinema.model.dto.order.OrderMapper;
 import com.dev.cinema.model.dto.order.OrderRequestDto;
 import com.dev.cinema.model.dto.order.OrderResponseDto;
 import com.dev.cinema.service.OrderService;
+import com.dev.cinema.service.UserService;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.dev.cinema.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
