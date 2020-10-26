@@ -46,18 +46,18 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> getOrdersByUser(User user) {
+    public List<Order> getOrdersByUser(Long userId) {
         logger.debug("Method getOrdersByUser() invoked");
         try (Session session = sessionFactory.openSession()) {
             Query<Order> query = session.createQuery("SELECT DISTINCT o FROM Order o "
                     + "JOIN FETCH o.user "
                     + "LEFT JOIN FETCH o.tickets t "
                     + "WHERE o.user.id = :userId", Order.class);
-            query.setParameter("userId", user.getId());
+            query.setParameter("userId", userId);
             return query.getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Failed to find Orders of user with id "
-                    + user.getId(), e);
+                    + userId, e);
         }
     }
 }

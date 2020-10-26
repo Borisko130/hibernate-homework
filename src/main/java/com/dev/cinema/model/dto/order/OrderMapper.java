@@ -3,20 +3,23 @@ package com.dev.cinema.model.dto.order;
 import com.dev.cinema.model.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @Component
 public class OrderMapper {
-    public Order convertDtoToOrder(OrderRequestDto dto) {
+   public Order convertDtoToOrder(OrderRequestDto dto) {
         Order order = new Order();
-        order.setTitle(dto.getTitle());
-        order.setDescription(dto.getDescription());
+        order.setTickets(new ArrayList<>(dto.getTickets()));
+        order.setUser(dto.getUser());
         return order;
     }
 
     public OrderResponseDto convertOrderToDto(Order order) {
         OrderResponseDto dto = new OrderResponseDto();
         dto.setId(order.getId());
-        dto.setTitle(order.getTitle());
-        dto.setDescription(order.getDescription());
+        dto.setTickets(order.getTickets());
+        dto.setOrderDate(order.getOrderDate());
+        dto.setUser(order.getUser());
         return dto;
     }
 }
