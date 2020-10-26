@@ -3,7 +3,6 @@ package com.dev.cinema.dao.impl;
 import com.dev.cinema.dao.OrderDao;
 import com.dev.cinema.exception.DataProcessingException;
 import com.dev.cinema.model.Order;
-import com.dev.cinema.model.User;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;

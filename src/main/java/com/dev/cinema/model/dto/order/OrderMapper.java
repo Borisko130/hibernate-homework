@@ -1,13 +1,12 @@
 package com.dev.cinema.model.dto.order;
 
 import com.dev.cinema.model.Order;
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
+import org.springframework.stereotype.Component;
 
 @Component
 public class OrderMapper {
-   public Order convertDtoToOrder(OrderRequestDto dto) {
+    public Order convertDtoToOrder(OrderRequestDto dto) {
         Order order = new Order();
         order.setTickets(new ArrayList<>(dto.getTickets()));
         order.setUser(dto.getUser());
