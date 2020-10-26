@@ -2,6 +2,7 @@ package com.dev.cinema.dao.impl;
 
 import com.dev.cinema.dao.UserDao;
 import com.dev.cinema.exception.DataProcessingException;
+import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.User;
 import java.util.Optional;
 import org.apache.log4j.Logger;
@@ -55,6 +56,17 @@ public class UserDaoImpl implements UserDao {
         } catch (Exception e) {
             throw new DataProcessingException("Failed to find user with email "
                     + email, e);
+        }
+    }
+
+    @Override
+    public User getById(Long id) {
+        logger.debug("Method getById() invoked with id " + id);
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(User.class, id);
+        } catch (Exception e) {
+            throw new DataProcessingException("Failed to get User with id "
+                    + id, e);
         }
     }
 }

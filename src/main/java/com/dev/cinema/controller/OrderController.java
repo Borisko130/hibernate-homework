@@ -7,6 +7,8 @@ import com.dev.cinema.model.dto.order.OrderResponseDto;
 import com.dev.cinema.service.OrderService;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.dev.cinema.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
     private final OrderService orderService;
     private final OrderMapper orderMapper;
+    private final UserService userService;
 
-    public OrderController(OrderService orderService, OrderMapper orderMapper) {
+    public OrderController(OrderService orderService, OrderMapper orderMapper, UserService userService) {
         this.orderService = orderService;
         this.orderMapper = orderMapper;
+        this.userService = userService;
     }
 
     @PostMapping("/complete")
@@ -33,7 +37,7 @@ public class OrderController {
 
     @GetMapping("/userId")
     public List<OrderResponseDto> getOrders(@RequestParam Long userId) {
-        return orderService.getOrderHistory(userId).stream()
+        return orderService.getOrderHistory(userService.getById(userId)).stream()
                 .map(orderMapper::convertOrderToDto)
                 .collect(Collectors.toList());
     }
