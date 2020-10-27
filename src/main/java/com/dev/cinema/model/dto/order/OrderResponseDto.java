@@ -7,9 +7,9 @@ import java.util.List;
 
 public class OrderResponseDto {
     private Long id;
-    private List<Ticket> tickets;
+    private List<Long> tickets;
     private LocalDateTime orderDate;
-    private User user;
+    private Long userId;
 
     public Long getId() {
         return id;
@@ -19,11 +19,11 @@ public class OrderResponseDto {
         this.id = id;
     }
 
-    public List<Ticket> getTickets() {
+    public List<Long> getTickets() {
         return tickets;
     }
 
-    public void setTickets(List<Ticket> tickets) {
+    public void setTickets(List<Long> tickets) {
         this.tickets = tickets;
     }
 
@@ -35,11 +35,11 @@ public class OrderResponseDto {
         this.orderDate = orderDate;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
