@@ -1,7 +1,5 @@
 package com.dev.cinema.model.dto.order;
 
-import com.dev.cinema.model.Ticket;
-import com.dev.cinema.model.User;
 import java.time.LocalDateTime;
 import java.util.List;
 
