@@ -6,13 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OrderMapper {
-    public Order convertDtoToOrder(OrderRequestDto dto) {
-        Order order = new Order();
-        order.setTickets(new ArrayList<>(dto.getTickets()));
-        order.setUser(dto.getUser());
-        return order;
-    }
-
     public OrderResponseDto convertOrderToDto(Order order) {
         OrderResponseDto dto = new OrderResponseDto();
         dto.setId(order.getId());

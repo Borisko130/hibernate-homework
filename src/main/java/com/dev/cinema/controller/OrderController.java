@@ -1,10 +1,11 @@
 package com.dev.cinema.controller;
 
 import com.dev.cinema.model.Order;
+import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.dto.order.OrderMapper;
-import com.dev.cinema.model.dto.order.OrderRequestDto;
 import com.dev.cinema.model.dto.order.OrderResponseDto;
 import com.dev.cinema.service.OrderService;
+import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,22 +22,22 @@ public class OrderController {
     private final OrderService orderService;
     private final OrderMapper orderMapper;
     private final UserService userService;
+    private final ShoppingCartService shoppingCartService;
 
-    public OrderController(OrderService orderService,
-                           OrderMapper orderMapper,
-                           UserService userService) {
+    public OrderController(OrderService orderService, OrderMapper orderMapper, UserService userService, ShoppingCartService shoppingCartService) {
         this.orderService = orderService;
         this.orderMapper = orderMapper;
         this.userService = userService;
+        this.shoppingCartService = shoppingCartService;
     }
 
     @PostMapping("/complete")
-    public void completeOrder(@RequestBody OrderRequestDto dto) {
-        Order order = orderMapper.convertDtoToOrder(dto);
-        orderService.completeOrder(order.getTickets(), order.getUser());
+    public void completeOrder(@RequestParam Long userId) {
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(userService.getById(userId));
+        orderService.completeOrder(shoppingCart.getTickets(), shoppingCart.getUser());
     }
 
-    @GetMapping("/userId")
+    @GetMapping
     public List<OrderResponseDto> getOrders(@RequestParam Long userId) {
         return orderService.getOrderHistory(userService.getById(userId)).stream()
                 .map(orderMapper::convertOrderToDto)
